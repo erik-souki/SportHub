@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-screen bg-gray-50">
+  <div class="flex h-screen bg-neutral-900">
     <aside class="w-60 bg-gray-800 text-white p-6 transition-all duration-300 hover:bg-gray-700">
       <h2 class="text-3xl font-bold text-yellow-300 mb-8">RoarSync</h2>
       <nav  class="bg-blue-900 text-white h-16 shadow-md rounded-lg">
