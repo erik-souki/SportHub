@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gradient-to-br from-white to-gray-50 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300">
+  <div class="bg-gradient-to-br from-white to-gray-50 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 max-w-full">
     <h2 class="text-2xl font-extrabold text-gray-900 mb-6">Ranking de Torcedores</h2>
     <div class="grid gap-4">
       <div v-for="(user, index) in rankings" :key="index" class="flex items-center justify-between p-4 rounded-lg border border-gray-200 hover:bg-gray-100 transition-colors"
@@ -9,7 +9,7 @@
         <span class="text-lg font-medium text-gray-600">{{ user.points }} pts</span>
       </div>
     </div>
-    <p v-if="rankings.length === 0" class="text-red-600 mt-4 font-medium">Nenhum ranking disponível</p>
+    <p v-if="!rankings || rankings.length === 0" class="text-red-600 mt-4 font-medium">Nenhum ranking disponível</p>
   </div>
 </template>
 

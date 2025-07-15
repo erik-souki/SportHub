@@ -2,13 +2,13 @@
   <div class="flex h-screen bg-gray-50">
     <aside class="w-60 bg-gray-800 text-white p-6 transition-all duration-300 hover:bg-gray-700">
       <h2 class="text-3xl font-bold text-yellow-300 mb-8">RoarSync</h2>
-      <navclass class="bg-blue-900 text-white h-16 shadow-md rounded-lg">
+      <nav  class="bg-blue-900 text-white h-16 shadow-md rounded-lg">
         <ul>
           <li v-for="item in navItems" :key="item.name" class="mb-6">
             <router-link :to="item.route" class="text-lg hover:text-yellow-200 hover:underline">{{ item.name }}</router-link>
           </li>
         </ul>
-      </navclass>
+      </nav>
     </aside>
     <main class="flex-1 p-6 overflow-y-auto">
       <slot />
@@ -19,6 +19,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+
 
 const router = useRouter();
 const navItems = ref([

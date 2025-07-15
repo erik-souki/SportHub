@@ -9,6 +9,21 @@ const routes = [
   { path: '/palpites', component: BetsView },
   { path: '/meus-palpites', component: MyBetsView },
   { path: '/perfil', component: ProfileView },
+  {
+    path: '/bets',
+    name: 'Bets',
+    component: () => import('@/views/BetsView.vue'),
+  },
+  {
+    path: '/my-bets',
+    name: 'MyBets',
+    component: () => import('@/views/MyBetsView.vue'),
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import('@/views/ProfileView.vue'),
+  },
 ];
 
 const router = createRouter({

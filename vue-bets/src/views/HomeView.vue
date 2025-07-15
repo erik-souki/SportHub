@@ -10,7 +10,7 @@
     </header>
 
     <NextGame
-      v-if="nextGame"
+      v-if="nextGame && Object.keys(nextGame).length"
       v-bind="nextGame"
       class="mb-8 bg-green-100 p-6 rounded-lg shadow-md"
     />
@@ -42,6 +42,11 @@
       </div>
     </section>
 
+    <div class="max-w-full overflow-x-auto mb-4">
+      <Ranking v-if="isRankingsLoaded" :rankings="rankings" class="inline-block" />
+      <div v-else class="text-red-600 font-semibold mt-2">Ranking não carregado</div>
+    </div>
+
     <GameSchedule
       :games="gameSchedule"
       class="bg-blue-50 p-6 rounded-lg shadow-md"
@@ -54,6 +59,7 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+import { storeToRefs } from "pinia";
 import { useUserStore } from "../store/user";
 import BaseLayout from "../components/BaseLayout.vue";
 import NextGame from "../components/NextGame.vue";
@@ -61,27 +67,29 @@ import UserStats from "../components/UserStats.vue";
 import QuickAction from "../components/QuickAction.vue";
 import GameSchedule from "../components/GameSchedule.vue";
 import Ranking from "../components/Ranking.vue";
+
 const store = useUserStore();
+const { nextGame, userStats, gameSchedule, rankings } = storeToRefs(store);
+
 const quickActions = ref([
   "Ver todos Palpites",
   "Central de Gritos",
   "Ver Ranking Completo",
 ]);
 
-onMounted(() => {
-  store
-    .fetchData()
-    .then(() => {
-      console.log("Dados carregados:", store.$state);
-    })
-    .catch((error) => {
-      console.error("Erro ao carregar dados:", error);
-    });
+const isRankingsLoaded = ref(false);
+
+onMounted(async () => {
+  try {
+    await store.fetchData();
+    isRankingsLoaded.value = rankings.value.length > 0;
+    console.log("Dados carregados:", store.$state);
+  } catch (error) {
+    console.error("Erro ao carregar dados:", error);
+  }
 });
 
 const handleAction = (action) => {
   alert(`Ação: ${action}`);
 };
-
-const { nextGame, userStats, gameSchedule } = store;
 </script>
